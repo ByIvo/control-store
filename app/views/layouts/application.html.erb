@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>ControlStore</title>
+	<%= csrf_meta_tags %>
+
+	<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+	<%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
+
+<body>
+	<nav class="navbar navbar-default navbar-fixed-top navbar-menu">
+		<a class="navbar-brand" href="/">
+			Control Store 1.0
+		</a>
+
+		<div class="container">
+			<nav class="pull-right" aria-label="Navegação do sistema">
+				<ul class="pagination">
+					<li><a href="/products">Produtos</a></li>
+					<li><a href="/customers">Clientes</a></li>
+					<li><a href="/sellers">Vendedores</a></li>
+				</ul>
+			</nav>
+		</div>
+
+	</nav>
+	<%= yield %>
+</body>
+</html>

@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  seller: one
+  customer: one
+  saleDate: 2016-11-20 14:08:44
+
+two:
+  seller: two
+  customer: two
+  saleDate: 2016-11-20 14:08:44

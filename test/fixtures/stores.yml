@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  quantity: 1
+  product: one
+  isSale: false
+  movementDate: 2016-11-20 14:08:10
+
+two:
+  quantity: 1
+  product: two
+  isSale: false
+  movementDate: 2016-11-20 14:08:10
