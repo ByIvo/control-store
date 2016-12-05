@@ -15,16 +15,43 @@
 		</a>
 
 		<div class="container">
-			<nav class="pull-right" aria-label="Navegação do sistema">
+
+			<% unless $logged_user == nil %>
+
+			<h5 style="margin-top: 30px;" class="pull-right">
+				Olá <%= $logged_user.name %>, seja bem vindo!
+			</h5>
+
+			<nav class="pull-right" style="margin: 0 25px" aria-label="Navegação do sistema">
+				<ul class="pagination">
+					<li><a href="/logout">Logout</a></li>
+				</ul>
+			</nav>
+
+			<nav class="pull-right" style="margin: 0 25px" aria-label="Vendas">
+				<ul class="pagination">
+					<li><a href="/sales">Vendas</a></li>
+					<li><a href="/customers">Clientes</a></li>
+				</ul>
+			</nav>
+
+			<% if Administrator === $logged_user %>
+			<nav class="pull-right" style="margin: 0 25px" aria-label="Navegação do sistema">
 				<ul class="pagination">
 					<li><a href="/products">Produtos</a></li>
-					<li><a href="/customers">Clientes</a></li>
 					<li><a href="/sellers">Vendedores</a></li>
 				</ul>
 			</nav>
+			
+			<nav class="pull-right" style="margin: 0 25px" aria-label="Report">
+				<ul class="pagination">
+					<li><a class="btn alert-danger" href="/report/products">Relatório de Produtos</a></li>
+				</ul>
+			</nav>
 		</div>
-
+		<% end -%>
 	</nav>
+	<% end -%>
 	<%= yield %>
 </body>
 </html>

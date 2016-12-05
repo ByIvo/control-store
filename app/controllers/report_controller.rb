@@ -27,8 +27,8 @@ class ReportController < ApplicationController
 		end
 
 		@filters[:filter] = params[:filter].presence || ''
-		@filters[:min_price] = params[:min_price].presence || 0
-		@filters[:max_price] = params[:max_price].presence || 0
+		@filters[:min_price] = params[:min_price].presence || '0'
+		@filters[:max_price] = params[:max_price].presence || '0'
 
 		clear_params
 	end

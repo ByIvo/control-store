@@ -1,0 +1,36 @@
+<div class="container">
+
+	<div class="jumbotrom">
+		<h1 class="text-center">
+			Seja bem vindo ao <a href="/"> Control Store </a>
+		</h1>
+	</div>
+
+	<div class="text-center">
+		<h4> Selecione o menu desejado </h4>
+		<div class="container">
+
+			<nav class="" style="margin: 0 25px" aria-label="Vendas">
+				<ul class="pagination">
+					<li><a href="/sales">Vendas</a></li>
+					<li><a href="/customers">Clientes</a></li>
+				</ul>
+			</nav>
+
+			<% if Administrator === $logged_user %>
+			<nav class="" style="margin: 0 25px" aria-label="Navegação do sistema">
+				<ul class="pagination">
+					<li><a href="/products">Produtos</a></li>
+					<li><a href="/sellers">Vendedores</a></li>
+				</ul>
+			</nav>
+			
+			<nav class="" style="margin: 0 25px" aria-label="Report">
+				<ul class="pagination">
+					<li><a class="btn alert-danger" href="/report/products">Relatório de Produtos</a></li>
+				</ul>
+			</nav>
+			<% end -%>
+		</div>
+	</div>
+</div>
