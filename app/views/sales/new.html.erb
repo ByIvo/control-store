@@ -1,5 +1,32 @@
 <%- model_class = Sale -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => [:'helpers.titles.new', 'New %{model}'], :model => model_class.model_name.human.titleize %></h1>
+	<h1><%=t '.title', :default => [:'helpers.titles.new', 'New %{model}'], :model => model_class.model_name.human.titleize %></h1>
 </div>
-<%= render :partial => 'form' %>
+<%= form_for @sale, :html => { :class => "form-horizontal sale" }  do |f| %>
+
+<div class="form-group">
+	<%= f.label :saleDate, :class => 'control-label col-lg-2' %>
+	<div class="col-lg-10">
+		<%= f.date_select :saleDate, :order => [:day, :month, :year],:class => 'form-control' %>
+	</div>
+	<%=f.error_span(:saleDate) %>
+</div>
+
+<div class="form-group">
+	<%= f.label :customer, :class => 'control-label col-lg-2' %>
+	<div class="col-lg-10">
+		<%= f.select( "customer_id", @customers, {:class => 'form-control'}) %>
+	</div>
+	<%=f.error_span(:customer) %>
+</div>
+
+
+<div class="form-group">
+	<div class="col-lg-offset-2 col-lg-10">
+		<%= f.submit nil, :class => 'btn btn-primary' %>
+		<%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+		sales_path, :class => 'btn btn-default' %>
+	</div>
+</div>
+
+<% end %>

@@ -16,6 +16,7 @@ class SalesController < ApplicationController
   # GET /sales/new
   def new
     @sale = Sale.new
+    @customers = find_selector_customers
   end
 
   # GET /sales/1/edit
@@ -26,7 +27,6 @@ class SalesController < ApplicationController
   # POST /sales.json
   def create
     @sale = Sale.new(sale_params)
-
     @sale.seller = Seller.first
 
     respond_to do |format|
@@ -54,6 +54,47 @@ class SalesController < ApplicationController
     end
   end
 
+  def choose_products
+    print 'test'
+    @sale_product = SaleProduct.new
+
+    print @sale
+
+    @sale_products = SaleProduct.where(:sale_id => @sale.id)
+    @available_products = Procuts.where("product_id NOT IN ?", @sale_products.map(&:product_id))
+  end
+
+  def add_product
+    product = Product.where(:id => params[:product_id])
+
+    store = Store.new
+    store.quantity = params[:quantity]
+    store.isSale = true
+    store.product = product
+    store.movementDate = Time.now
+    store.save
+
+    @sale_product.product = product
+    @sale_product.price = product.price
+    @sale_product.sale = @sale
+    @sale_product.store = store
+
+    @sale_product.save
+  end
+
+  def remove_product
+    product_id = params[:product_id]
+    @sale_products.each do |i|
+      if(i.product.id == product_id) then
+        i.destroy
+      end
+    end
+  end
+
+  def finish_sale
+    redirect_to "show"
+  end 
+
   # DELETE /sales/1
   # DELETE /sales/1.json
   def destroy
@@ -65,7 +106,7 @@ class SalesController < ApplicationController
   end
 
   def find_selector_customers
-      @selector_customers = Customer.all.collect {|customer| [ customer.name, customer.id ]}
+      @selector_customers = Customer.order(:name).collect {|customer| [ customer.name, customer.id ]}
     end
 
   private

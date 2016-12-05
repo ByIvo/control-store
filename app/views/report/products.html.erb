@@ -9,23 +9,26 @@
 
 	<!-- FORMULÁRIO DE FILTRO -->
 	<div class="col-xs-12">
-		<%= form_tag("/report/filter_products", method: :post, class: "form-inline") do |f|%>
+		<%= form_tag("/report/products", method: :get, class: "form-inline") do |f|%>
 		<div class="form-group col-xs-12 col-md-6">
 			<%= label_tag( :filter, 'Nome')%>
-			<%=  text_field_tag( :filter, nil, style: "width: 100%",class: "form-control col-xs-12", placeholder: "Digite o nome do produto")%>
+			<%=  text_field_tag( :filter, nil,value: @filters[:filter], style: "width: 100%",class: "form-control col-xs-12", placeholder: "Digite o nome do produto")%>
 		</div>
 		<div class="form-group col-xs-8 col-md-4">
 			<%= label_tag( :min_price, 'Preço Entre')%>
 
 			<div class="input-group">
-				<%=  text_field_tag( :min_price, nil, class: "form-control col-xs-12", placeholder: "0")%>
+				<%=  text_field_tag( :min_price, nil,value: @filters[:min_price], class: "form-control col-xs-12", placeholder: "0")%>
 				<div class="input-group-addon"> - </div>
-				<%=  text_field_tag( :max_price, nil, class: "form-control col-xs-12", placeholder: "0")%>
+				<%=  text_field_tag( :max_price, nil,value: @filters[:max_price], class: "form-control col-xs-12", placeholder: "0")%>
 			</div>
 		</div>
 		<div class="form-group col-xs-4 col-md-2">
-			<%= label_tag( :min_price, 'Opções')%>
-			<%= submit_tag("Filtrar", class: "btn btn-primary col-xs-12") %>
+			<%= label_tag( "", 'Opções')%>
+			<%= submit_tag("Filtrar", class: "btn btn-primary col-xs-8") %>
+			<%= button_tag(type: :submit, name: :clear, class: "btn btn-danger col-xs-4") do %>
+				<i class="glyphicon glyphicon-trash"></i>
+			<% end -%>
 		</div>
 		<% end -%>
 	</div>
@@ -40,7 +43,7 @@
 						<th class="col-xs-2 col-md-2">Criado em</th>
 					</tr>
 				</thead>
-
+				
 				<tbody>
 					<% @filtered_products.each do |product| %>
 					<tr>
@@ -52,12 +55,12 @@
 					<% end %>
 
 					<tr class="info">
-					<td colspan="3" class="text-right">
-						Total de itens: 
-					</td>
-					<td class="text-left">
-						<%= @filtered_products.size %>
-					</td>
+						<td colspan="3" class="text-right">
+							Total de itens: 
+						</td>
+						<td class="text-left">
+							<%= @filtered_products.size %>
+						</td>
 					</tr>
 				</tbody>
 
